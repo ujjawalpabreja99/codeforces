@@ -34,16 +34,15 @@ inline ll sub(ll a, ll b){ return ((a%mod) - (b%mod) + mod)%mod;}
 void Flash(){
     ll a, b, c, d;
     cin>>a>>b>>c>>d;
-    ll mxx = b;
-    ll mxy = d;
-    if (mxx <= 0 && mxy <= 0) {
-        mxx = a, mxy = c;
-    } else if (mxx <= 0) {
-        mxy = c;
-    } else if (mxy <= 0) {
-        mxx = a;
+    vector <ll> x ({a, b});
+    vector <ll> y ({c, d});
+    ll ans = -1 * inf;
+    for (ll i = 0; i < 2; i++) {
+        for (ll j = 0; j < 2; j++) {
+            ans = max(ans, x[i] * y[j]);
+        }
     }
-    cout<<mxx * mxy<<"\n";
+    cout<<ans<<"\n";
 }
 
 int main(int argc, char const *argv[]){ 
