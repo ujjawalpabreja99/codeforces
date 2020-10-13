@@ -14,20 +14,23 @@ const int MAX = 2e5 + 1;
 void Solve() {
     ll n;
     cin >> n;
-    if (n % 3 == 0) {
-        cout << n / 3 << " " << 0 << " " << 0 << endl;
-    } else if (n % 3 == 1) {
-        if (n >= 6) {
-            cout << n / 3 - 2 << " " << 0 << " " << 1 << endl;
+    string s;
+    cin >> s;
+    set <ll> rooms;
+    for (int i = 0; i < 10; i++) {
+        rooms.insert(i);
+    }
+    for (int i = 0; i < n; i++) {
+        if (s[i] == 'L') {
+            rooms.erase(*rooms.begin());
+        } else if (s[i] == 'R') {
+            rooms.erase(*rooms.rbegin());
         } else {
-            cout << -1 << endl;
+            rooms.insert(s[i] - '0');
         }
-    } else {
-        if (n >= 3) {
-            cout << n / 3 - 1 << " " << 1 << " " << 0 << endl;
-        } else {
-            cout << -1 << endl;
-        }
+    }
+    for (int i = 0; i < 10; i++) {
+        cout << !rooms.count(i);
     }
 }
 
@@ -37,7 +40,7 @@ signed main() {
     cout.tie(NULL);
 
     int testcases = 1;
-    cin >> testcases;
+    // cin >> testcases;
 
     while (testcases--) {
         Solve();
