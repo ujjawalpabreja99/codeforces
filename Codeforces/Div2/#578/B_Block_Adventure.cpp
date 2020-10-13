@@ -12,18 +12,28 @@ const int mod = 1e9 + 7;
 const int MAX = 2e5 + 1;
 
 void Solve() {
-    ll n, k;
-    cin >> n >> k;
+    ll n, m, k;
+    cin >> n >> m >> k;
     vector <ll> a(n);
     for (auto& i : a) {
         cin >> i;
     }
-    sort(a.rbegin(), a.rend());
-    int ans = 0;
-    for (int i = 0; i <= k; i++) {
-        ans += a[i];
+    ll prev = a[0];
+    for (int i = 1; i < n; i++) {
+        ll val = max(a[i] - k, 0LL);
+        if (prev < val) {
+            if (prev + m >= val) {
+                m -= (val - prev);
+            } else {
+                cout << "NO" << endl;
+                return;
+            }
+        } else {
+            m += (prev - val);
+        }
+        prev = a[i];
     }
-    cout << ans << endl;
+    cout << "YES" << endl;
 }
 
 signed main() {
